@@ -10,9 +10,9 @@
 
 @section('body')
     <div class="container-fluid d-flex h-100 justify-content-center align-items-center p-0">
-        <h2>Welcome {{$name}}</h2>
+        <h2>Confirm match</h2>
     </div>
-    @include('inc.parser')
+    @include('inc.confirm')
 @endsection
 
 @section('footer')

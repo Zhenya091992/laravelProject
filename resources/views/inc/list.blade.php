@@ -1,0 +1,14 @@
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    @foreach($list as $key => $value)
+        <div class="col">
+            <div class="card text-white bg-secondary" style="width: 18rem;">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{ $value->id }}</h5>
+                    <p class="card-text">{{ $value->url }}</p>
+                    <a href="{{ route('monitoring', ['idSourceData' => $value->id]) }}" class="btn btn-primary">Price monitoring</a>
+                </div>
+            </div>
+        </div>
+    @endforeach
+</div>
