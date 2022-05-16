@@ -21,7 +21,7 @@ class Price extends Model
             $res = str_replace(' ', '', $res);
             preg_match_all('|[0-9]*[.,][0-9]+|', $res, $matches);
 
-            return $matches[0][0];
+            return str_replace(',', '.', $matches[0][0]);
         } else {
             return false;
         }
