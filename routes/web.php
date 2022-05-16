@@ -73,4 +73,9 @@ Route::middleware(Authenticate::class)->group(function() {
         AccountController::class,
         'monitoring'
     ])->name('monitoring');
+
+    Route::get('/delete/{idSourceData}',[
+        AccountController::class,
+        'delete'
+    ])->name('deleteSourceData');
 });

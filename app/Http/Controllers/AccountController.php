@@ -21,4 +21,12 @@ class AccountController extends Controller
             ->get();
         return view('monitoring', ['prices' => $prices]);
     }
+
+    public function delete($idSourceData)
+    {
+        DB::table('source_data')->where('id', '=', $idSourceData)->delete();
+        DB::table('price_store')->where('idSourceData', '=', $idSourceData)->delete();
+
+        return redirect(route('list'));
+    }
 }
