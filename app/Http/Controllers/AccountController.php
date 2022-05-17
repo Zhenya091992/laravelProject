@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -20,10 +21,12 @@ class AccountController extends Controller
             ->where('idSourceData', '=', $idSourceData)
             ->get();
         foreach ($prices as $key => $price) {
-            $data[] = ['x' => (int) $key + 1 , 'y' => (int) $price->price];
+            $date = new Carbon($price->created_at);
+            $newDate = $date->isoFormat('D');
+            $data[] = ['x' => $newDate , 'y' => (int) $price->price];
         }
 
-        return view('monitoring', ['prices' => (string) json_encode($data)]);
+        return view('monitoring', ['prices' => json_encode($data)]);
     }
 
     public function delete($idSourceData)
