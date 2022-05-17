@@ -19,7 +19,11 @@ class AccountController extends Controller
         $prices = DB::table('price_store')
             ->where('idSourceData', '=', $idSourceData)
             ->get();
-        return view('monitoring', ['prices' => $prices]);
+        foreach ($prices as $key => $price) {
+            $data[] = ['x' => (int) $key + 1 , 'y' => (int) $price->price];
+        }
+
+        return view('monitoring', ['prices' => (string) json_encode($data)]);
     }
 
     public function delete($idSourceData)
