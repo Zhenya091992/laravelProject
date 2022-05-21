@@ -12,7 +12,7 @@
                 <h1 class="h3 mb-3 fw-normal text-white">Or try again</h1>
                 <div class="mb-3">
                     <label for="urlAddress">URL address</label>
-                    <input name="url" type="url" class="form-control" id="urlAddress" value="{{ session('url') }}">
+                    <input name="url" type="url" class="form-control" id="urlAddress" value="{{ session('urlPattern') }}">
                 </div>
                 <div class="mb-3">
                     <label for="price">Price</label>

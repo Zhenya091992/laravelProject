@@ -6,11 +6,11 @@
                 <h1 class="h3 mb-3 fw-normal text-white">Please enter URL address</h1>
                 <div class="mb-3">
                     <label for="urlAddress">URL address</label>
-                    <input name="url" type="url" class="form-control" id="urlAddress" placeholder="example.com">
+                    <input name="url" type="url" class="form-control" id="urlAddress" placeholder="example.com" value="{{ session('urlPattern') }}">
                 </div>
                 <div class="mb-3">
                     <label for="price">Price</label>
-                    <input name="pattern" type="text" class="form-control" id="price" placeholder="Pattern">
+                    <input name="pattern" type="text" class="form-control" id="price" placeholder="Pattern" value="{{ session('pattern') }}">
                 </div>
                 <button class="w-100 btn btn-lg btn-primary" type="submit">Ok</button>
             </form>

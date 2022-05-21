@@ -5,7 +5,7 @@
                 <img src="..." class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">{{ $value->id }}</h5>
-                    <p class="card-text">{{ $value->url }}</p>
+                    <a class="card-text text-white " href="{{ $value->url }}">{{ $value->url }}</a>
                     <a href="{{ route('monitoring', ['idSourceData' => $value->id]) }}" class="btn btn-primary">Price monitoring</a>
                     <a href="{{ route('deleteSourceData', ['idSourceData' => $value->id]) }}" class="btn btn-warning">Delete</a>
                 </div>
