@@ -20,13 +20,18 @@ class AccountController extends Controller
         $prices = DB::table('price_store')
             ->where('idSourceData', '=', $idSourceData)
             ->get();
-        foreach ($prices as $key => $price) {
+        foreach ($prices as $price) {
             $date = new Carbon($price->created_at);
             $newDate = $date->isoFormat('D');
             $data[] = ['x' => $newDate , 'y' => (int) $price->price];
         }
+        $record = DB::table('source_data')->where('id', '=', $idSourceData)->first();
 
-        return view('monitoring', ['prices' => json_encode($data)]);
+        return view('monitoring', [
+            'idSourceData' => $idSourceData,
+            'prices' => json_encode($data),
+            'record' => $record
+            ]);
     }
 
     public function delete($idSourceData)
@@ -35,5 +40,17 @@ class AccountController extends Controller
         DB::table('price_store')->where('idSourceData', '=', $idSourceData)->delete();
 
         return redirect(route('list'));
+    }
+
+    public function update(Request $request, $idSourceData)
+    {
+        DB::table('source_data')
+            ->where('id', $idSourceData)
+            ->update([
+                'url' => $request->input('url'),
+                'pattern' => $request->input('pattern')
+            ]);
+
+        return redirect(route('monitoring', ['idSourceData' => $idSourceData]));
     }
 }

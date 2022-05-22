@@ -78,4 +78,9 @@ Route::middleware(Authenticate::class)->group(function() {
         AccountController::class,
         'delete'
     ])->name('deleteSourceData');
+
+    Route::any('/update/{idSourceData}', [
+        AccountController::class,
+        'update'
+    ])->name('update');
 });
