@@ -22,7 +22,7 @@ class AccountController extends Controller
             ->get();
         foreach ($prices as $price) {
             $date = new Carbon($price->created_at);
-            $newDate = $date->isoFormat('D');
+            $newDate = $date->isoFormat('YYYYMMDD');
             $data[] = ['x' => $newDate , 'y' => (int) $price->price];
         }
         $record = DB::table('source_data')->where('id', '=', $idSourceData)->first();
