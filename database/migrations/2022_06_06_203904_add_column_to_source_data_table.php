@@ -13,12 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('source_data', function (Blueprint $table) {
-            $table->id();
-            $table->integer('idUser');
-            $table->string('url');
-            $table->string('pattern');
-            $table->timestamps();
+        Schema::table('source_data', function (Blueprint $table) {
+            $table->double('min_price');
         });
     }
 
@@ -29,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('source_data');
+        Schema::table('source_data', function (Blueprint $table) {
+            //
+        });
     }
 };
