@@ -6,7 +6,6 @@ use DOMDocument;
 use DOMXPath;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use simplehtmldom\HtmlWeb;
 
 class Price extends Model
 {

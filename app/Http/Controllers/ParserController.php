@@ -15,7 +15,8 @@ class ParserController extends Controller
         $price = new Price();
         $price->url = $request->post('url');
         $price->pattern = $request->post('pattern');
-        $request->session()->put(['urlPattern' => $request->post('url'), 'pattern' => $request->post('pattern')]);
+        $request->session()
+            ->put(['urlPattern' => $request->post('url'), 'pattern' => $request->post('pattern')]);
         if ($value = $price->findPrice($request->post('url'), $request->post('pattern'))) {
             return redirect('/confirm/' . $value);
         } else {
@@ -26,15 +27,18 @@ class ParserController extends Controller
     public function success(Request $request, $match)
     {
         if (DB::table('source_data')
-            ->where(['idUser' => Auth::user()->id, 'url' => session()->get('urlPattern')], '=')->doesntExist()) {
+            ->where(['idUser' => Auth::user()->id, 'url' => session()->get('urlPattern')], '=')
+            ->doesntExist()) {
             $record = new Record();
             $record->idUser = Auth::user()->id;
             $record->url = session()->get('urlPattern');
             $record->pattern = session()->get('pattern');
+            $record->min_price = $match;
             $record->save();
         } else {
             $record = DB::table('source_data')
-                ->where(['idUser' => Auth::user()->id, 'url' => session()->get('urlPattern')], '=')->first();
+                ->where(['idUser' => Auth::user()->id, 'url' => session()->get('urlPattern')], '=')
+                ->first();
         }
         $price = new Price();
         $price->idSourceData = $record->id;

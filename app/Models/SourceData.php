@@ -10,4 +10,9 @@ class SourceData extends Model
     use HasFactory;
 
     protected $table = 'source_data';
+
+    public function comparePrice($price)
+    {
+        return $this->min_price > $price;
+    }
 }

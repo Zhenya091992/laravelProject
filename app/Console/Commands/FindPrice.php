@@ -2,9 +2,13 @@
 
 namespace App\Console\Commands;
 
+use App\Jobs\SendMail;
+use App\Mail\Notification;
 use App\Models\Price;
+use App\Models\User;
+use App\Models\SourceData;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class FindPrice extends Command
 {
@@ -13,7 +17,7 @@ class FindPrice extends Command
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'command:FindPrice';
 
     /**
      * The console command description.
@@ -39,11 +43,20 @@ class FindPrice extends Command
      */
     public function handle()
     {
-        foreach (DB::table('source_data')->get() as $sourceData) {
+        foreach (SourceData::all() as $sourceData ) {
             $price = new Price();
             if ($price->price = $price->findPrice($sourceData->url, $sourceData->pattern)) {
                 $price->idSourceData = $sourceData->id;
                 $price->save();
+
+                $user = User::find($sourceData->idUser);
+
+                if ($sourceData->comparePrice($price->price)) {
+                    SendMail::dispatch($user, $sourceData, $price->price);
+
+                    $sourceData->min_price = $price->price;
+                    $sourceData->save();
+                }
             } else {
                 \Log::error("Price dont making!!!");
             }
