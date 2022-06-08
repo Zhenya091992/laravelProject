@@ -25,7 +25,7 @@ class Price extends Model
             $res = $node->nodeValue;
         }
         $res = str_replace(' ', '', $res);
-        preg_match_all('|[0-9]*[.,]{0,1}[0-9]+|', $res, $matches);
+        preg_match_all('|[0-9]*[ .,]{0,1}[0-9]+|', $res, $matches);
 
         return str_replace(',', '.', $matches[0][0]);
     }
