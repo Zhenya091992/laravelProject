@@ -48,7 +48,8 @@ class AccountController extends Controller
             ->where('id', $idSourceData)
             ->update([
                 'url' => $request->input('url'),
-                'pattern' => $request->input('pattern')
+                'pattern' => $request->input('pattern'),
+                'min_price' => $request->input('minPrice')
             ]);
 
         return redirect(route('monitoring', ['idSourceData' => $idSourceData]));

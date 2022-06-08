@@ -69,6 +69,10 @@
                         <label for="price">Xpath</label>
                         <input name="pattern" type="text" class="form-control" id="price" placeholder="Pattern" value="{{ $record->pattern }}">
                     </div>
+                    <div class="mb-3">
+                        <label for="minPrice">min price</label>
+                        <input name="minPrice" type="text" class="form-control" id="minPrice" placeholder="min price" value="{{ $record->min_price }}">
+                    </div>
                     <button class="w-100 btn btn-lg btn-warning" type="submit">Accept changes</button>
                 </form>
             </main>
