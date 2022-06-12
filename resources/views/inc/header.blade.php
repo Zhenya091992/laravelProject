@@ -1,6 +1,6 @@
-<header class="">
+<header>
     <div>
-        <h3 class="float-md-start mb-0">Cover</h3>
+        <h3 class="float-md-start mb-0">Monitoring</h3>
         <nav class="nav nav-masthead justify-content-center float-md-end">
             <a class="nav-link active" aria-current="page" href="{{ route('/') }}">Home</a>
             @if( \Illuminate\Support\Facades\Auth::check())

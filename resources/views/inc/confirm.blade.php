@@ -6,7 +6,7 @@
                 <h1 class="h3 mb-3 fw-normal text-white">This is price {{ $match }}?</h1>
                 <div class="mb-3">
                     <button type="button" class="w-100 btn btn-primary btn-lg">
-                        <a class="text-white" href="{{ '/success/' . $match }}">Yes it is</a>
+                        <a class="text-white" href="{{ '/success/' . $match }}">Confirm</a>
                     </button>
                 </div>
                 <h1 class="h3 mb-3 fw-normal text-white">Or try again</h1>

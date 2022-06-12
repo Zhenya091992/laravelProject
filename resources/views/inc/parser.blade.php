@@ -9,8 +9,8 @@
                     <input name="url" type="url" class="form-control" id="urlAddress" placeholder="example.com" value="{{ session('urlPattern') }}">
                 </div>
                 <div class="mb-3">
-                    <label for="price">Price</label>
-                    <input name="pattern" type="text" class="form-control" id="price" placeholder="Pattern" value="{{ session('pattern') }}">
+                    <label for="price">XPath</label>
+                    <input name="pattern" type="text" class="form-control" id="price" placeholder="XPath" value="{{ session('pattern') }}">
                 </div>
                 <button class="w-100 btn btn-lg btn-primary" type="submit">Ok</button>
             </form>
