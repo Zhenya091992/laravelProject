@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Price;
-use App\Models\Record;
+use App\Models\SourceData;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class ParserController extends Controller
 {
@@ -24,22 +23,15 @@ class ParserController extends Controller
         }
     }
 
-    public function success(Request $request, $match)
+    public function success($match)
     {
-        if (DB::table('source_data')
-            ->where(['idUser' => Auth::user()->id, 'url' => session()->get('urlPattern')], '=')
-            ->doesntExist()) {
-            $record = new Record();
-            $record->idUser = Auth::user()->id;
-            $record->url = session()->get('urlPattern');
-            $record->pattern = session()->get('pattern');
-            $record->min_price = $match;
-            $record->save();
-        } else {
-            $record = DB::table('source_data')
-                ->where(['idUser' => Auth::user()->id, 'url' => session()->get('urlPattern')], '=')
-                ->first();
-        }
+        $record = new SourceData();
+        $record->idUser = Auth::user()->id;
+        $record->url = session()->get('urlPattern');
+        $record->pattern = session()->get('pattern');
+        $record->min_price = $match;
+        $record->save();
+
         $price = new Price();
         $price->idSourceData = $record->id;
         $price->price = $match;

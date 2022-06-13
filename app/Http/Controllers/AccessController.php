@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Rules\CurrentPassword;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,7 +20,7 @@ class AccessController extends Controller
             'password' => ['required', 'string', $checkPassword]
         ]);
 
-        $user = DB::table('users')->where('email', $request->only('email'))->first();
+        $user = User::where('email', $request->only('email'))->first();
 
         return redirect('/account/' . $user->name);
     }

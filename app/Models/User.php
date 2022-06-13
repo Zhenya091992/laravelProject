@@ -41,4 +41,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function sourceData()
+    {
+        return $this->hasMany(SourceData::class, 'idUser');
+    }
 }

@@ -29,4 +29,9 @@ class Price extends Model
 
         return str_replace(',', '.', $matches[0][0]);
     }
+
+    public function sourceData()
+    {
+        return $this->belongsTo(SourceData::class, 'idSourceData');
+    }
 }

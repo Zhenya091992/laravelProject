@@ -11,8 +11,24 @@ class SourceData extends Model
 
     protected $table = 'source_data';
 
+    protected $fillable = [
+        'url',
+        'pattern',
+        'min_price'
+    ];
+
     public function comparePrice($price)
     {
         return $this->min_price > $price;
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'idUser');
+    }
+
+    public function price()
+    {
+        return $this->hasMany(Price::class, 'idSourceData');
     }
 }
