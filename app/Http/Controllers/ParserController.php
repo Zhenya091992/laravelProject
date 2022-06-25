@@ -9,15 +9,16 @@ use Illuminate\Support\Facades\Auth;
 
 class ParserController extends Controller
 {
-    public function parse(Request $request)
+    public function parsing(Request $request)
     {
         $price = new Price();
         $price->url = $request->post('url');
         $price->pattern = $request->post('pattern');
         $request->session()
             ->put(['urlPattern' => $request->post('url'), 'pattern' => $request->post('pattern')]);
-        if ($value = $price->findPrice($request->post('url'), $request->post('pattern'))) {
-            return redirect('/confirm/' . $value);
+        $value = $price->findPrice($request->post('url'), $request->post('pattern'));
+        if ($value) {
+            return redirect('confirm/' . $value);
         } else {
             return redirect()->back();
         }
@@ -37,6 +38,6 @@ class ParserController extends Controller
         $price->price = $match;
         $price->save();
 
-        return redirect('/monitoring/' . $record->id);
+        return redirect('monitoring/' . $record->id);
     }
 }

@@ -6,7 +6,6 @@ use App\Models\User;
 use App\Rules\CurrentPassword;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class AccessController extends Controller
 {
@@ -22,7 +21,7 @@ class AccessController extends Controller
 
         $user = User::where('email', $request->only('email'))->first();
 
-        return redirect('/account/' . $user->name);
+        return redirect('account/' . $user->name);
     }
 
     public function exit()

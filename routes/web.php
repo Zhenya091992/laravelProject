@@ -22,65 +22,38 @@ Route::get('/', function () {
     return view('home');
 })->name('/');
 
-Route::get('/register', function () {
+Route::get('register', function () {
     return view('register');
 });
 
-Route::post('/register', [
-    RegisterController::class,
-    'register'
-])->name('registerForm');
+Route::post('register', [RegisterController::class, 'register'])->name('registerForm');
 
-Route::get('/signin', function () {
+Route::get('signin', function () {
     return view('signin');
 });
 
-Route::post('/signin', [
-    AccessController::class,
-    'signin'
-])->name('signinForm');
+Route::post('signin', [AccessController::class, 'signin'])->name('signinForm');
 
 Route::middleware(Authenticate::class)->group(function() {
-    Route::get('/account/{name}', function ($name) {
+    Route::get('account/{name}', function ($name) {
         return view('personalPage', ['name' => $name]);
     })->name('account');
 
-    Route::get('/exit', [
-        AccessController::class,
-        'exit'
-    ])->name('exit');
+    Route::get('exit', [AccessController::class, 'exit'])->name('exit');
 
-    Route::post('/account/', [
-        ParserController::class,
-        'parse'
-    ])->name('parser');
+    Route::post('account/', [ParserController::class, 'parsing'])->name('parser');
 
-    Route::any('/confirm/{match}', function($match) {
+    Route::any('confirm/{match}', function($match) {
         return view('confirmMatch', ['match' => $match]);
     })->name('confirm');
 
-    Route::get('/success/{match}', [
-        ParserController::class,
-        'success'
-    ])->name('success');
+    Route::get('success/{match}', [ParserController::class, 'success'])->name('success');
 
-    Route::get('/list', [
-        AccountController::class,
-        'list'
-    ])->name('list');
+    Route::get('list', [AccountController::class, 'list'])->name('list');
 
-    Route::get('/monitoring/{idSourceData}',[
-        AccountController::class,
-        'monitoring'
-    ])->name('monitoring');
+    Route::get('monitoring/{idSourceData}',[AccountController::class, 'monitoring'])->name('monitoring');
 
-    Route::get('/delete/{idSourceData}',[
-        AccountController::class,
-        'delete'
-    ])->name('deleteSourceData');
+    Route::get('delete/{idSourceData}',[AccountController::class, 'delete'])->name('deleteSourceData');
 
-    Route::any('/update/{idSourceData}', [
-        AccountController::class,
-        'update'
-    ])->name('update');
+    Route::any('update/{idSourceData}', [AccountController::class, 'update'])->name('update');
 });
