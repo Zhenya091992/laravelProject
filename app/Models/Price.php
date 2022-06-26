@@ -21,9 +21,7 @@ class Price extends Model
         $dom->loadHTML($data);
         $domXpath = new DOMXPath($dom);
         $query = $domXpath->query($pattern);
-        foreach ($query as $node) {
-            $res = $node->nodeValue;
-        }
+        $res = $query[0]->nodeValue;
         $res = str_replace(' ', '', $res);
         preg_match_all('|[0-9]*[ .,]{0,1}[0-9]+|', $res, $matches);
 
