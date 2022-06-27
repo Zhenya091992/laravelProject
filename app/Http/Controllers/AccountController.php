@@ -21,7 +21,7 @@ class AccountController extends Controller
         foreach ($prices as $price) {
             $date = new Carbon($price->created_at);
             $newDate = $date->isoFormat('YYYYMMDD');
-            $data[] = ['x' => $newDate , 'y' => (int) $price->price];
+            $data[] = ['x' => $newDate , 'y' => (float) $price->price];
         }
 
         return view('monitoring', [
