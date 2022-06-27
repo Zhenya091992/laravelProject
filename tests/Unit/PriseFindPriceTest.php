@@ -25,5 +25,13 @@ class PriseFindPriceTest extends TestCase
             (new Price())->findPrice(__DIR__ . '/PriceFindPrice.html', '/html/body/bookstore/book[2]/price'),
             'Find price error'
         );
+
+        /*
+         * wrong XPath
+         */
+        $this->assertFalse(
+            (new Price())->findPrice(__DIR__ . '/PriceFindPrice.html', '/html/bookstore/book[1]/price'),
+            'Find price error'
+        );
     }
 }

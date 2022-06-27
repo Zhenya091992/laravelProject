@@ -15,17 +15,23 @@ class Price extends Model
 
     public function findPrice($url, $pattern): string|false
     {
-        $data = file_get_contents($url);
-        libxml_use_internal_errors(true);
-        $dom = new DOMDocument();
-        $dom->loadHTML($data);
-        $domXpath = new DOMXPath($dom);
-        $query = $domXpath->query($pattern);
-        $res = $query[0]->nodeValue;
-        $res = str_replace(' ', '', $res);
-        preg_match_all('|[0-9]*[ .,]{0,1}[0-9]+|', $res, $matches);
+        if ($data = file_get_contents($url)) {
+            libxml_use_internal_errors(true);
+            $dom = new DOMDocument();
+            if ($dom->loadHTML($data)) {
+                $domXpath = new DOMXPath($dom);
+                $query = $domXpath->query($pattern);
+                if (isset($query[0])) {
+                    $res = $query[0]->nodeValue;
+                    $res = str_replace(' ', '', $res);
+                    preg_match_all('|[0-9]*[ .,]{0,1}[0-9]+|', $res, $matches);
 
-        return str_replace(',', '.', $matches[0][0]);
+                    return str_replace(',', '.', $matches[0][0]);
+                }
+            }
+        }
+
+        return false;
     }
 
     public function sourceData()
