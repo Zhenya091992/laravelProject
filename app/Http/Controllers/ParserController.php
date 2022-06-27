@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Price;
 use App\Models\SourceData;
-use Illuminate\Http\Request;
+use App\Http\Requests\ParsingRequest;
 use Illuminate\Support\Facades\Auth;
 
 class ParserController extends Controller
 {
-    public function parsing(Request $request)
+    public function parsing(ParsingRequest $request)
     {
         $price = new Price();
         $price->url = $request->post('url');
