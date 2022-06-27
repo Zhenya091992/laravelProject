@@ -17,16 +17,10 @@ class AccountController extends Controller
     public function monitoring($idSourceData)
     {
         $sourceData = Auth::user()->sourceData()->find($idSourceData);
-        $prices = $sourceData->price()->get();
-        foreach ($prices as $price) {
-            $date = new Carbon($price->created_at);
-            $newDate = $date->isoFormat('YYYYMMDD');
-            $data[] = ['x' => $newDate , 'y' => (float) $price->price];
-        }
 
         return view('monitoring', [
             'idSourceData' => $idSourceData,
-            'prices' => json_encode($data),
+            'prices' => json_encode($sourceData->makeDataForGraph()),
             'record' => $sourceData
             ]);
     }

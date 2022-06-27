@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -20,6 +21,17 @@ class SourceData extends Model
     public function comparePrice($price)
     {
         return $this->min_price > $price;
+    }
+
+    public function makeDataForGraph()
+    {
+        foreach ($this->price()->get() as $price) {
+            $datePrice = new Carbon($price->created_at);
+            $editedDate = $datePrice->isoFormat('YYYYMMDD');
+            $data[] = ['x' => $editedDate , 'y' => (float) $price->price];
+        }
+
+        return $data;
     }
 
     public function user()
