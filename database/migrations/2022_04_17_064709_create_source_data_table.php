@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('idUser');
             $table->string('url');
             $table->string('pattern');
+            $table->double('min_price');
             $table->timestamps();
         });
     }
