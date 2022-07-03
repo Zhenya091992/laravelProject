@@ -16,6 +16,10 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('command:FindPrice')->daily();
+        // Удаление устаревших резервных копий
+        $schedule->command('backup:clean')->dailyAt('01:00');
+        // Создание резеврной копии
+        $schedule->command('backup:run --only-db')->dailyAt('01:30');
     }
 
     /**

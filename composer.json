@@ -6,14 +6,15 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
+        "ext-dom": "*",
         "cron/cron": "^1.6",
         "guzzlehttp/guzzle": "^7.4",
         "laravel/framework": "^9.2",
         "laravel/sanctum": "^2.14.1",
         "laravel/tinker": "^2.7",
         "simplehtmldom/simplehtmldom": "^2.0@RC",
-        "twbs/bootstrap": "5.0.2",
-        "ext-dom": "*"
+        "spatie/laravel-backup": "^8.1",
+        "twbs/bootstrap": "5.0.2"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
