@@ -42,9 +42,16 @@ class SourceDataTest extends TestCase
 
         $this->assertEquals(
             [
-                0 => ['x' => $price1->created_at->isoFormat('YYYYMMDD') , 'y' => $price1->price],
-                1 => ['x' => $price2->created_at->isoFormat('YYYYMMDD') , 'y' => $price2->price],
-                2 => ['x' => $price3->created_at->isoFormat('YYYYMMDD') , 'y' => $price3->price]
+                'x' => [
+                    0 => $price1->created_at->isoFormat('YYYY MM DD'),
+                    1 => $price2->created_at->isoFormat('YYYY MM DD'),
+                    2 => $price3->created_at->isoFormat('YYYY MM DD')
+                ],
+                'y' => [
+                    0 => $price1->price,
+                    1 => $price2->price,
+                    2 => $price3->price
+                ]
             ],
             $sourceData->makeDataForGraph()
         );

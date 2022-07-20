@@ -13,7 +13,8 @@
 
                 <script>
                     $(function () {
-                        var householdPrices = {!! $prices !!};
+                        var x = {!! $priceOsX !!};
+                        var y = {!! $priceOsY !!};
                         $("#chart").shieldChart({
                             theme: "dark",
                             exportOptions: {
@@ -41,6 +42,9 @@
                                     }
                                 }
                             },
+                            axisX: {
+                                categoricalValues: x
+                            },
                             axisY: {
                                 title: {
                                     text: "Price"
@@ -49,7 +53,7 @@
                             dataSeries: [{
                                 seriesType: 'line',
                                 collectionAlias: "article",
-                                data: householdPrices
+                                data: y
                             }]
                         });
                     });

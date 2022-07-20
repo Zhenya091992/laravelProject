@@ -20,7 +20,8 @@ class AccountController extends Controller
 
         return view('monitoring', [
             'idSourceData' => $idSourceData,
-            'prices' => json_encode($sourceData->makeDataForGraph()),
+            'priceOsX' => json_encode($sourceData->makeDataForGraph()['x']),
+            'priceOsY' => json_encode($sourceData->makeDataForGraph()['y']),
             'record' => $sourceData
             ]);
     }

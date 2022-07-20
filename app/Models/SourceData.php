@@ -27,8 +27,9 @@ class SourceData extends Model
     {
         foreach ($this->price()->get() as $price) {
             $datePrice = new Carbon($price->created_at);
-            $editedDate = $datePrice->isoFormat('YYYYMMDD');
-            $data[] = ['x' => $editedDate , 'y' => (float) $price->price];
+            $editedDate = $datePrice->isoFormat('YYYY MM DD');
+            $data['x'][] = $editedDate;
+            $data['y'][] = (float) $price->price;
         }
 
         return $data;
