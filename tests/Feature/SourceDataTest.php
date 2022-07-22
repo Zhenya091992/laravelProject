@@ -43,9 +43,9 @@ class SourceDataTest extends TestCase
         $this->assertEquals(
             [
                 'x' => [
-                    0 => $price1->created_at->isoFormat('YYYY MM DD'),
-                    1 => $price2->created_at->isoFormat('YYYY MM DD'),
-                    2 => $price3->created_at->isoFormat('YYYY MM DD')
+                    0 => $price1->created_at->isoFormat('MM DD'),
+                    1 => $price2->created_at->isoFormat('MM DD'),
+                    2 => $price3->created_at->isoFormat('MM DD')
                 ],
                 'y' => [
                     0 => $price1->price,
