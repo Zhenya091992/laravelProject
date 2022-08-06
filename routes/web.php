@@ -57,3 +57,10 @@ Route::middleware(Authenticate::class)->group(function() {
 
     Route::any('update/{idSourceData}', [AccountController::class, 'update'])->name('update');
 });
+
+Route::get('test', [\App\Http\Controllers\TestController::class, 'test']);
+
+
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});
