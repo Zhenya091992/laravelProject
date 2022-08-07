@@ -23,7 +23,7 @@ class AccountController extends Controller
             'priceOsX' => json_encode($sourceData->makeDataForGraph()['x']),
             'priceOsY' => json_encode($sourceData->makeDataForGraph()['y']),
             'record' => $sourceData
-            ]);
+        ]);
     }
 
     public function delete($idSourceData)
@@ -44,5 +44,10 @@ class AccountController extends Controller
         ]);
 
         return redirect(route('monitoring', ['idSourceData' => $idSourceData]));
+    }
+
+    public function addImage(Request $request, $idSourceData)
+    {
+        dump($request);
     }
 }

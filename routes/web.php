@@ -56,6 +56,12 @@ Route::middleware(Authenticate::class)->group(function() {
     Route::get('delete/{idSourceData}',[AccountController::class, 'delete'])->name('deleteSourceData');
 
     Route::any('update/{idSourceData}', [AccountController::class, 'update'])->name('update');
+
+    Route::get('addImage/{idSourceData}', function ($idSourceData) {
+        return view('addImage', ['idSourceData' => $idSourceData]);
+    })->name('addImage');
+
+    Route::post('addImage/{idSourceData}', [AccountController::class, 'addImage']);
 });
 
 Route::group(['prefix' => 'admin'], function () {
