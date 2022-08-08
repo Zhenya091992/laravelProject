@@ -44,4 +44,9 @@ class SourceData extends Model
     {
         return $this->hasMany(Price::class, 'idSourceData');
     }
+
+    public function image()
+    {
+        return $this->hasOne(Image::class, 'idSourceData');
+    }
 }
