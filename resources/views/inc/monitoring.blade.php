@@ -5,7 +5,7 @@
 <br><br><br>
 
 <div class="container">
-    <a class="btn nav-link" href="{{ route('addImage', ['idSourceData' => $idSourceData]) }}">Add image</a>
+    <a class="btn nav-link" href="{{ route('addImageGet', ['idSourceData' => $idSourceData]) }}">Add image</a>
         <div class="container">
 
             <!-- График --><div id="chart">

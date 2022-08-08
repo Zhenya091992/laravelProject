@@ -1,4 +1,8 @@
-<form action="{{ route('addImage',['idSourceData' => $idSourceData]) }}" method="post">
+@if($errors->any())
+<h4>{{$errors->first()}}</h4>
+@endif
+
+<form action="{{ route('addImagePost',['idSourceData' => $idSourceData]) }}" method="post">
     @csrf
     <h1 class="h3 mb-3 fw-normal text-white">Paste url address image</h1>
     <div class="mb-3">
