@@ -5,6 +5,13 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+use Imagine\Imagick\Imagine;
+use Imagine\Image\Box;
+use Imagine\Image\ImageInterface;
+use App\Http\Requests\AddImageRequest;
+use App\Models\Image;
+use Illuminate\Support\Facades\Http;
 
 class AccountController extends Controller
 {
@@ -46,8 +53,26 @@ class AccountController extends Controller
         return redirect(route('monitoring', ['idSourceData' => $idSourceData]));
     }
 
-    public function addImage(Request $request, $idSourceData)
+    public function addImage(AddImageRequest $request, $idSourceData)
     {
-        dump($request);
+        $tempDir = 'tempFiles/tempImg' . $idSourceData;
+        $image = file_get_contents($request->post('urlImage'));
+        $file = file_put_contents($tempDir, $image);
+        $pathImageComplit = 'image/products/' . $idSourceData . 'image.png';
+        $imagine = new Imagine();
+        $size    = new Box(100, 100);
+        $mode    = ImageInterface::THUMBNAIL_INSET;
+        $imagine->open($tempDir)
+            ->thumbnail($size, $mode)
+            ->save($pathImageComplit);
+
+        $image = new Image();
+        $image->idSourceData = $idSourceData;
+        $image->name = 'image';
+        $image->pathImage = $pathImageComplit;
+        $image->save();
+        unlink($tempDir);
+
+        return redirect(route('monitoring', ['idSourceData' => $idSourceData]));
     }
 }
