@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Rules\ExistUrl;
+use App\Rules\IsImageUrl;
 use Illuminate\Foundation\Http\FormRequest;
 
 class AddImageRequest extends FormRequest
@@ -25,7 +26,7 @@ class AddImageRequest extends FormRequest
     public function rules()
     {
         return [
-            'urlImage' => ['required', 'url', new ExistUrl]
+            'urlImage' => ['bail', 'required', 'url', new ExistUrl, new IsImageUrl]
         ];
     }
 }
