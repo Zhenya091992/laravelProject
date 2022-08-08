@@ -9,6 +9,13 @@ class Image extends Model
 {
     use HasFactory;
 
+    protected $table = 'images';
+
+    protected $fillable = [
+        'name',
+        'pathImage'
+    ];
+
     public function sourceData()
     {
         return $this->belongsTo(SourceData::class, 'idSourceData');
