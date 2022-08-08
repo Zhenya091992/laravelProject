@@ -59,9 +59,9 @@ Route::middleware(Authenticate::class)->group(function() {
 
     Route::get('addImage/{idSourceData}', function ($idSourceData) {
         return view('addImage', ['idSourceData' => $idSourceData]);
-    })->name('addImage');
+    })->name('addImageGet');
 
-    Route::post('addImage/{idSourceData}', [AccountController::class, 'addImage']);
+    Route::post('addImage/{idSourceData}', [AccountController::class, 'addImage'])->name('addImagePost');
 });
 
 Route::group(['prefix' => 'admin'], function () {
