@@ -37,6 +37,7 @@ class AccountController extends Controller
     {
         $sourceData = Auth::user()->sourceData()->find($idSourceData);
         $sourceData->price()->delete();
+        $sourceData->image()->first()->delete();
         $sourceData->delete();
 
         return redirect(route('list'));
@@ -60,7 +61,7 @@ class AccountController extends Controller
         $file = file_put_contents($tempDir, $image);
         $pathImageComplit = 'image/products/' . $idSourceData . 'image.png';
         $imagine = new Imagine();
-        $size    = new Box(100, 100);
+        $size    = new Box(200, 200);
         $mode    = ImageInterface::THUMBNAIL_INSET;
         $imagine->open($tempDir)
             ->thumbnail($size, $mode)

@@ -20,4 +20,10 @@ class Image extends Model
     {
         return $this->belongsTo(SourceData::class, 'idSourceData');
     }
+
+    public function delete()
+    {
+        unlink($this->pathImage);
+        return parent::delete();
+    }
 }
