@@ -12,6 +12,7 @@ use Imagine\Image\ImageInterface;
 use App\Http\Requests\AddImageRequest;
 use App\Models\Image;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
 
 class AccountController extends Controller
 {
@@ -56,23 +57,26 @@ class AccountController extends Controller
 
     public function addImage(AddImageRequest $request, $idSourceData)
     {
-        $tempDir = 'tempFiles/tempImg' . $idSourceData;
+        $tempDir = 'tempFiles' . DIRECTORY_SEPARATOR . 'tempImg' . $idSourceData;
         $image = file_get_contents($request->post('urlImage'));
-        $file = file_put_contents($tempDir, $image);
-        $pathImageComplit = 'image/products/' . $idSourceData . 'image.png';
+        Storage::put($tempDir, $image);
+        $pathImageComplit = Storage::path(
+            'images' . DIRECTORY_SEPARATOR . 'products' . DIRECTORY_SEPARATOR . $idSourceData . 'image.png'
+        );
+
         $imagine = new Imagine();
         $size    = new Box(200, 200);
         $mode    = ImageInterface::THUMBNAIL_INSET;
-        $imagine->open($tempDir)
+        $imagine->open(Storage::path($tempDir))
             ->thumbnail($size, $mode)
             ->save($pathImageComplit);
 
         $image = new Image();
         $image->idSourceData = $idSourceData;
-        $image->name = 'image';
+        $image->name = $request->post('nameImage');
         $image->pathImage = $pathImageComplit;
         $image->save();
-        unlink($tempDir);
+        Storage::delete($tempDir);
 
         return redirect(route('monitoring', ['idSourceData' => $idSourceData]));
     }
