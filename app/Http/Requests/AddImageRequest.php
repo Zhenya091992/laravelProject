@@ -26,7 +26,8 @@ class AddImageRequest extends FormRequest
     public function rules()
     {
         return [
-            'urlImage' => ['bail', 'required', 'url', new ExistUrl, new IsImageUrl]
+            'urlImage' => ['bail', 'required', 'url', new ExistUrl, new IsImageUrl],
+            'nameImage' => ['required']
         ];
     }
 }
