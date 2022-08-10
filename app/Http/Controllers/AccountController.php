@@ -57,11 +57,11 @@ class AccountController extends Controller
 
     public function addImage(AddImageRequest $request, $idSourceData)
     {
-        $tempDir = 'tempFiles' . DIRECTORY_SEPARATOR . 'tempImg' . $idSourceData;
+        $tempDir = 'tempFiles/tempImg' . $idSourceData;
         $image = file_get_contents($request->post('urlImage'));
         Storage::put($tempDir, $image);
         $pathImageComplit = Storage::path(
-            'images' . DIRECTORY_SEPARATOR . 'products' . DIRECTORY_SEPARATOR . $idSourceData . 'image.png'
+            $pathImage = 'images/products/' . $idSourceData . 'image.png'
         );
 
         $imagine = new Imagine();
@@ -69,12 +69,12 @@ class AccountController extends Controller
         $mode    = ImageInterface::THUMBNAIL_INSET;
         $imagine->open(Storage::path($tempDir))
             ->thumbnail($size, $mode)
-            ->save($pathImageComplit);
+            ->save('storage/' . $pathImage);
 
         $image = new Image();
         $image->idSourceData = $idSourceData;
         $image->name = $request->post('nameImage');
-        $image->pathImage = $pathImageComplit;
+        $image->pathImage = $pathImage;
         $image->save();
         Storage::delete($tempDir);
 
