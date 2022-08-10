@@ -2,13 +2,13 @@
     @foreach($list as $key => $value)
         <div class="col">
             <div class="card text-white bg-secondary" style="width: 18rem;">
-                <img src="
+                <img src=
                     @if($image = $value->image()->first())
-                        {{ $image->pathImage }}
+                        "{{ Storage::url($image->pathImage) }}"
                     @else
-                        image/noImage.png
+                        "storage/images/noImageProduct.png"
                     @endif
-                " class="card-img-top" alt="...">
+                 class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">{{ $value->id }}</h5>
                     <a class="card-text text-white " href="{{ $value->url }}">{{ $value->url }}</a>
