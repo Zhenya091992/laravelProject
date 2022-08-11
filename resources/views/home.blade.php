@@ -21,6 +21,9 @@
         <img src="/image/copy_XPATH.png">
         <li>Next, paste XPATH into the field on our website and click ok.</li>
         <li>If the price matches the price on the website, confirm the match. If the price is incorrect or not determined, check if you did everything correctly.</li>
+            <div class="btn btn-warning">
+                <a class="btn" href="{{ route('demoAccount') }}">Try demo account</a>
+            </div>
     </div>
 @endsection
 

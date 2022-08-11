@@ -6,6 +6,8 @@ use App\Http\Controllers\ParserController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\Authenticate;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +23,12 @@ use App\Http\Middleware\Authenticate;
 Route::get('/', function () {
     return view('home');
 })->name('/');
+
+Route::get('/demo', function(){
+    $user = User::where('email', 'demo@mail.com')->first();
+    Auth::attempt(['email' => 'demo@mail.com', 'password' => 'password']);
+    return redirect(route('account', ['name' => $user->name]));
+})->name('demoAccount');
 
 Route::get('register', function () {
     return view('register');
