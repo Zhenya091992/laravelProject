@@ -42,7 +42,10 @@
                                 }
                             },
                             axisX: {
-                                categoricalValues: x
+                                categoricalValues: x,
+                                title: {
+                                    text: "Date"
+                                }
                             },
                             axisY: {
                                 title: {
@@ -60,25 +63,46 @@
 
             </div><!-- /.col-md-8 col-md-offset-2 -->
 
-            <main class="container-sm form-parser">
-                <form action="{{ route('update',['idSourceData' => $idSourceData]) }}" method="post">
-                    @csrf
-                    <h1 class="h3 mb-3 fw-normal text-white">You can change form</h1>
-                    <div class="mb-3">
-                        <label for="urlAddress">URL address</label>
-                        <input name="url" type="url" class="form-control" id="urlAddress" placeholder="example.com" value="{{ $record->url }}">
+            <div class="container">
+                <div class="row">
+                    <div class="col-8">
+                        <main class="container-sm form-parser">
+                            <form action="{{ route('update',['idSourceData' => $idSourceData]) }}" method="post">
+                                @csrf
+                                <h1 class="h3 mb-3 fw-normal text-white">You can change form</h1>
+                                <div class="mb-3">
+                                    <label for="urlAddress">URL address</label>
+                                    <input name="url" type="url" class="form-control" id="urlAddress" placeholder="example.com" value="{{ $record->url }}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="price">Xpath</label>
+                                    <input name="pattern" type="text" class="form-control" id="price" placeholder="Pattern" value="{{ $record->pattern }}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="minPrice">min price</label>
+                                    <input name="minPrice" type="text" class="form-control" id="minPrice" placeholder="min price" value="{{ $record->min_price }}">
+                                </div>
+                                <button class="w-100 btn btn-lg btn-warning" type="submit">Accept changes</button>
+                            </form>
+                        </main>
                     </div>
-                    <div class="mb-3">
-                        <label for="price">Xpath</label>
-                        <input name="pattern" type="text" class="form-control" id="price" placeholder="Pattern" value="{{ $record->pattern }}">
+                    <div class="col-4">
+                        <div class="container-sm">
+                            <h1 class="h3 mb-3 fw-normal text-white">Image product</h1>
+                            <img src=
+                                @if($image = $record->image()->first())
+                                    "{{ Storage::url($image->pathImage) }}"
+                                @else
+                                    "../storage/images/noImageProduct.png"
+                                @endif
+                                    class="card-img-top" alt="...">
+                        </div>
+                        <a class="btn nav-link" href="{{ route('addImageGet', ['idSourceData' => $idSourceData]) }}">Chaange image</a>
                     </div>
-                    <div class="mb-3">
-                        <label for="minPrice">min price</label>
-                        <input name="minPrice" type="text" class="form-control" id="minPrice" placeholder="min price" value="{{ $record->min_price }}">
-                    </div>
-                    <button class="w-100 btn btn-lg btn-warning" type="submit">Accept changes</button>
-                </form>
-            </main>
+                </div>
+              </div>
+
+
         </div><!-- /.row -->
 
 </div>
