@@ -10,7 +10,7 @@
                     @endif
                  class="card-img-top" alt="...">
                 <div class="card-body">
-                    <a class="card-text text-white " href="{{ $value->url }}">{{ $value->url }}</a>
+                    <a class="card-text text-white " href="{{ $value->url }}">{{ $value->url }}</a><br>
                     <a href="{{ route('monitoring', ['idSourceData' => $value->id]) }}" class="btn btn-primary">Price monitoring</a>
                     <a href="{{ route('deleteSourceData', ['idSourceData' => $value->id]) }}" class="btn btn-warning">Delete</a>
                 </div>
