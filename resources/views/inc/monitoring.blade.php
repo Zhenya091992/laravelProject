@@ -2,8 +2,6 @@
 <script src="https://bootstraptema.ru/plugins/jquery/jquery-1.11.3.min.js"></script>
 <script src="https://bootstraptema.ru/plugins/2016/shieldui/script.js"></script>
 
-<br><br><br>
-
 <div class="container">
     <a class="btn nav-link" href="{{ route('addImageGet', ['idSourceData' => $idSourceData]) }}">Add image</a>
         <div class="container">
