@@ -73,8 +73,3 @@ Route::middleware(Authenticate::class)->group(function() {
 });
 
 Route::get('test', [\App\Http\Controllers\TestController::class, 'test']);
-
-
-Route::group(['prefix' => 'admin'], function () {
-    Voyager::routes();
-});
