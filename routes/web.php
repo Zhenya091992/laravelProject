@@ -72,6 +72,9 @@ Route::middleware(Authenticate::class)->group(function() {
     Route::post('addImage/{idSourceData}', [AccountController::class, 'addImage'])->name('addImagePost');
 });
 
+Route::get('test', [\App\Http\Controllers\TestController::class, 'test']);
+
+
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
