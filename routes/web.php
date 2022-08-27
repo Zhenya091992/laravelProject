@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\Authenticate;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,7 +25,7 @@ Route::get('/', function () {
     return view('home');
 })->name('/');
 
-Route::get('/demo', function(){
+Route::get('demo', function(){
     $user = User::where('email', 'demo@mail.com')->first();
     Auth::attempt(['email' => 'demo@mail.com', 'password' => 'password']);
     return redirect(route('account', ['name' => $user->name]));
@@ -72,4 +73,5 @@ Route::middleware(Authenticate::class)->group(function() {
     Route::post('addImage/{idSourceData}', [AccountController::class, 'addImage'])->name('addImagePost');
 });
 
-Route::get('test', [\App\Http\Controllers\TestController::class, 'test']);
+Route::get('admin', [AdminController::class, 'listTables'])->name('adminMain');
+Route::get('admin/{nameTable}', [AdminController::class, 'Table'])->name('adminTable');
