@@ -28,8 +28,6 @@
         </tbody>
     </table>
 
-    {{ $table->links() }}
-
 @endsection
 
 @section('footer')
